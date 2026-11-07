@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Unity 会把此 manifest 与自动生成的合并. 此处声明额外权限 + 给主 Activity 补 launcher intent-filter. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.vr180.player">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <!-- 声明支持手势模式, 防止 Pico 系统拦截启动 (显示 HandDialog 导致闪退) -->
+    <uses-permission android:name="com.picovr.permission.HAND_TRACKING" />
+
+    <application android:requestLegacyExternalStorage="true">
+        <meta-data android:name="handtracking" android:value="1" />
+        <!-- XR Management 的 xrmanifest 把 UnityPlayerGameActivity 声明成了无 intent-filter,
+             导致应用不出现在启动器里. 这里补上 MAIN + LAUNCHER. -->
+        <activity android:name="com.unity3d.player.UnityPlayerGameActivity"
+            android:exported="true"
+            android:theme="@style/BaseUnityGameActivityTheme"
+            tools:replace="android:theme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+
