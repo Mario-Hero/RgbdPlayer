@@ -16,7 +16,7 @@ Unity 6 Depth Video Player: Utilizes hemispherical mesh + vertex displacement to
 
 播放效果如何呢？我只能说稍微有点用，头部可以大幅旋转、轻微移动，并且始终有立体感。如果头移动太远，深度之间的“悬崖”会拉丝得非常严重，影响观感。
 
-深度图的存储，我是用了上下限+对数+10bit，保证近距离精度能到半厘米。但是我感觉模型好像本身也没有这么高精度……
+深度图的存储，我是用了上下限+对数+10bit HEVC 视频编码，保证近距离精度能到半厘米。但是我感觉模型好像本身也没有这么高精度……
 
 而且这种方式，把双目视频转换成了左边单目+深度，那右边的RGB信息不就丢失了？假如左眼对齐原来的左眼视角，那右眼观看的画面必定会偏移，产生拉丝。
 
@@ -32,7 +32,7 @@ So I settled for the next best thing and used a classic method of combining a sp
 
 How about the playback effect? I can only say it's somewhat useful. The head can rotate significantly and move slightly, maintaining a three-dimensional sensation throughout. However, if the head moves too far, the "cliff" between depths will become severely distorted, affecting the viewing experience.
 
-For the storage of the depth map, I used an upper and lower limit, logarithm, and 10-bit to ensure accuracy to half a centimeter at close range. However, it seems to me that the model itself may not have such high accuracy
+For the storage of the depth map, I used an upper and lower limit, logarithmic scaling, and 10-bit HEVC video encoding to ensure accuracy down to half a centimeter at close range. However, it seems to me that the model itself may not have such high accuracy
 
 Moreover, this method converts the binocular video into left monocular + depth, doesn't that mean the RGB information on the right side will be lost? If the left eye aligns with the original left eye view, the image viewed by the right eye will inevitably be shifted, resulting in streaking.
 
